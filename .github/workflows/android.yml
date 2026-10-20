@@ -1,5 +1,5 @@
 
-name: Check Android project
+name: Build Android APK
 
 on:
   workflow_dispatch:
@@ -8,28 +8,44 @@ permissions:
   contents: read
 
 jobs:
-  check:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Download repository
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Check project files
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build web app
+        run: npm run build
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Sync Capacitor Android
+        run: npx cap sync android
+
+      - name: Build APK
+        working-directory: android
         run: |
-          echo "Checking repository files..."
-          if [ -f package.json ]; then
-            echo "package.json found"
-            cat package.json
-          else
-            echo "No package.json found"
-          fi
-          if [ -d android ]; then
-            echo "Android folder found"
-          else
-            echo "Android folder missing"
-          fi
-          if [ -f capacitor.config.ts ] || [ -f capacitor.config.json ] || [ -f capacitor.config.js ]; then
-            echo "Capacitor config found"
-          else
-            echo "Capacitor config missing"
-          fi
+          chmod +x gradlew
+          ./gradlew assembleDebug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: ASK-Delta-Force-APK
+          path: android/app/build/outputs/apk/debug/app-debug.apk
