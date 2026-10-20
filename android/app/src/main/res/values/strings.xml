@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">ASK Delta Force Lekenik</string>
+    <string name="title_activity_main">ASK Delta Force Lekenik</string>
+    <string name="package_name">hr.askdeltaforce.lekenik</string>
+    <string name="custom_url_scheme">hr.askdeltaforce.lekenik</string>
+</resources>

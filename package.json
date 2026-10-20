@@ -1,0 +1,16 @@
+{
+  "name": "ask-delta-force-lekenik",
+  "version": "1.0.0",
+  "private": true,
+  "description": "ASK Delta Force Lekenik Android app",
+  "scripts": {
+    "build": "node -e \"console.log('Static web app ready for Capacitor')\""
+  },
+  "dependencies": {
+    "@capacitor/android": "^8.5.3",
+    "@capacitor/core": "^8.5.3"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^8.5.3"
+  }
+}

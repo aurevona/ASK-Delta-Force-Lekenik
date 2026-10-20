@@ -1,0 +1,10 @@
+
+{
+  "appId": "hr.askdeltaforce.lekenik",
+  "appName": "ASK Delta Force Lekenik",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https"
+  }
+}
+
